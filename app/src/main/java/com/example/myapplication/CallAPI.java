@@ -31,10 +31,12 @@ public class CallAPI extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... strings) {
         String result="";
+        // input location latitude and longitude
+        String lat = "10.1",lon="125.6";
 
         try {
 
-            URL url = new URL("https://www.hpb.health.gov.lk/api/get-current-statistical");
+            URL url = new URL("https://api.tomorrow.io/v4/weather/realtime?location={%20%22type%22:%20%22Point%22,%20%22coordinates%22:%20["+lon+",%20"+lat+"]%20}&apikey=DB6YxZcw7tOnmKduEyEkZcFDFkVV0uZm");
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
