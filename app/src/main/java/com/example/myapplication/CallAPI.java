@@ -1,10 +1,15 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.location.Location;
 import android.os.AsyncTask;
 
 import com.example.myapplication.Models.Response;
 import com.example.myapplication.Models.SearchArrayObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -20,6 +25,11 @@ import retrofit2.http.Headers;
 
 public class CallAPI extends AsyncTask<String,Void,String> {
 
+    String location = "London";
+    public CallAPI(String location) {
+        this.location = location;
+    }
+
     // Before API call doing somethings
     @Override
     protected void onPreExecute() {
@@ -34,9 +44,12 @@ public class CallAPI extends AsyncTask<String,Void,String> {
         // input location latitude and longitude
         String lat = "10.1",lon="125.6";
 
-        try {
 
-            URL url = new URL("https://api.tomorrow.io/v4/weather/realtime?location={%20%22type%22:%20%22Point%22,%20%22coordinates%22:%20["+lon+",%20"+lat+"]%20}&apikey=DB6YxZcw7tOnmKduEyEkZcFDFkVV0uZm");
+        // https://docs.tomorrow.io/reference/api-formats
+
+        try {
+            // Location {%20%22type%22:%20%22Point%22,%20%22coordinates%22:%20["+lon+",%20"+lat+"]%20}
+            URL url = new URL("https://api.tomorrow.io/v4/weather/realtime?location="+location+"&apikey=DB6YxZcw7tOnmKduEyEkZcFDFkVV0uZm");
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -52,7 +65,9 @@ public class CallAPI extends AsyncTask<String,Void,String> {
             result = stringBuilder.toString();
         }
         catch (Exception e){
-            e.printStackTrace();
+            //System.out.println("Error");
+            result = "Error";
+            //  e.printStackTrace();
         }
 
         return result;
@@ -62,7 +77,19 @@ public class CallAPI extends AsyncTask<String,Void,String> {
     // Execution method
     @Override
     protected void onPostExecute(String result) {
-        System.out.println("Result"+result );
+        System.out.println("Result "+result+"\n" );
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            String temp = jsonObject.getJSONObject("data")
+                    .getJSONObject("values")
+                    .getString("temperature");
+            System.out.println("temperature :"+temp);
+
+        } catch (JSONException e) {
+            result = "Error";
+
+//            throw new RuntimeException(e);
+        }
         super.onPostExecute(result);
 
     }
