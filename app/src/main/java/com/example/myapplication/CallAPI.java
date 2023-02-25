@@ -1,13 +1,8 @@
 package com.example.myapplication;
 
-import android.content.Context;
-import android.location.Location;
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
-import com.example.myapplication.Models.Response;
-import com.example.myapplication.Models.SearchArrayObject;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,20 +12,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-
 public class CallAPI extends AsyncTask<String,Void,String> {
 
-    String location = "London";
+    String location = "London",temp;
+
     public CallAPI(String location) {
         this.location = location;
     }
 
-    // Before API call doing somethings
+    // Before API Call doing somethings
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -60,13 +50,13 @@ public class CallAPI extends AsyncTask<String,Void,String> {
             while ((line = bufferedReader.readLine()) !=null){
                 stringBuilder.append(line);
 
-
             }
             result = stringBuilder.toString();
         }
         catch (Exception e){
             //System.out.println("Error");
             result = "Error";
+
             //  e.printStackTrace();
         }
 
@@ -75,15 +65,20 @@ public class CallAPI extends AsyncTask<String,Void,String> {
 
 
     // Execution method
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onPostExecute(String result) {
         System.out.println("Result "+result+"\n" );
+
         try {
             JSONObject jsonObject = new JSONObject(result);
-            String temp = jsonObject.getJSONObject("data")
+             temp = jsonObject.getJSONObject("data")
                     .getJSONObject("values")
                     .getString("temperature");
+
             System.out.println("temperature :"+temp);
+            Response response = new Response();
+            response.setTemp(temp);
 
         } catch (JSONException e) {
             result = "Error";
