@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
     }
-    public void CallAPI(View view){
+    public void search(View view){
         SearchInput = findViewById(R.id.search);
         Temp = findViewById(R.id.temp);
 
@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
         TempValue = response.getTemp();
 
         System.out.println(TempValue);
-        if (TempValue !=null){
+        /*if (TempValue !=null){
             Temp.setText(TempValue);
 
         }else {
             Temp.setText("404 Not Found");
 
         }
-
+*/
 
     }
 

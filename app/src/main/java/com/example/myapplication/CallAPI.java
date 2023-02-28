@@ -54,10 +54,7 @@ public class CallAPI extends AsyncTask<String,Void,String> {
             result = stringBuilder.toString();
         }
         catch (Exception e){
-            //System.out.println("Error");
-            result = "Error";
-
-            //  e.printStackTrace();
+            e.printStackTrace();
         }
 
         return result;
@@ -69,6 +66,7 @@ public class CallAPI extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
         System.out.println("Result "+result+"\n" );
+        MainActivity mainActivity = new MainActivity();
 
         try {
             JSONObject jsonObject = new JSONObject(result);
@@ -77,11 +75,16 @@ public class CallAPI extends AsyncTask<String,Void,String> {
                     .getString("temperature");
 
             System.out.println("temperature :"+temp);
+            mainActivity.Temp.setText("Not Found");
+
+/*
             Response response = new Response();
             response.setTemp(temp);
+*/
 
         } catch (JSONException e) {
             result = "Error";
+            mainActivity.Temp.setText("Not Found");
 
 //            throw new RuntimeException(e);
         }
