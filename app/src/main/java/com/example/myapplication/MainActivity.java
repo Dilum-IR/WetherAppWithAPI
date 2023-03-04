@@ -13,9 +13,12 @@ import android.widget.Toast;
 import com.example.myapplication.utils.NetworkUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.InputMismatchException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         output = findViewById(R.id.temp);
 
     }
-    public void search(View view){
+    public void search(View view) throws IOException {
 
         String cityName = SearchInput.getText().toString();
 
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    public void getData(String cityName) {
+    public void getData(String cityName) throws IOException  {
         Uri uri = Uri.parse("https://api.tomorrow.io/v4/weather/realtime?location="+cityName+"&apikey=DB6YxZcw7tOnmKduEyEkZcFDFkVV0uZm")
                 .buildUpon().build();
         URL url = null;
@@ -55,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
             new CallApi().execute(url);
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            System.out.println("error"+ e);
         }
 
 
     }
-    class CallApi extends AsyncTask<URL,Void,String>{
+    class CallApi extends AsyncTask<URL,Void,String> {
 
         @Override
         protected String doInBackground(URL... urls) {
@@ -71,29 +74,39 @@ public class MainActivity extends AppCompatActivity {
                 return data;
 
             } catch (IOException e) {
-               e.printStackTrace();
-               return null;
+                System.out.println("error"+ e);
+
+                return "Error";
             }
 
         }
 
         @Override
         protected void onPostExecute(String s) {
-            parseJson(s);
+            try {
+                parseJson(s);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        public void parseJson(String data) {
+        public void parseJson(String data)throws IOException  {
             String result;
 
             JSONObject cityo = null;
+
             try {
                 cityo = new JSONObject(data);
+
                 result = cityo.getJSONObject("data")
                         .getJSONObject("values")
                         .getString("temperature");
                 output.setText(result);
 
             } catch (JSONException e) {
-               result = "Not Found";
+               System.out.println("error"+ e);
+               output.setText("Not Found");
+
+
             }
 
         }
