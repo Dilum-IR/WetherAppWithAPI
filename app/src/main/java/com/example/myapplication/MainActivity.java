@@ -25,7 +25,7 @@ import java.util.InputMismatchException;
 public class MainActivity extends AppCompatActivity {
 
     Context context;
-    TextView SearchInput,output,erro;
+    TextView SearchInput,output,Erro;
     String TempValue = null;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         SearchInput = findViewById(R.id.search);
         output = findViewById(R.id.temp);
+        Erro = findViewById(R.id.erro);
 
     }
     public void search(View view) throws IOException {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         String cityName = SearchInput.getText().toString();
 
         if (cityName.isEmpty()){
-            erro.setText("Please Enter Location");
+            Erro.setText("Please Enter Location");
         }
         else {
 
@@ -108,9 +109,12 @@ public class MainActivity extends AppCompatActivity {
             }
             catch (JSONException e) {
                System.out.println("error"+ e);
-               erro.setText("Not Found");
+             //  output.setText("Error");
 
 
+            }
+            if (data.equals("Error")){
+                Erro.setText("Not Found");
             }
 
         }
