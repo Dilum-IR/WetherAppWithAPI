@@ -1,7 +1,7 @@
 # Wether_App_With_API
-This app develop to use java language & tommoro.io wether API.
-that tommoro.io API's always update it's details. 
-Realtime Wether request to used this API.
-Search to can be use lat,lon or location name.
-Any Location Wether can be see this APP
-Include API is free version.
+This app develop to use java language & tommoro.io wether API.<br>
+that tommoro.io API's always update it's details.<br>
+Realtime Wether request to used this API.<br>
+Search to can be use lat,lon or location name.<br>
+Any Location Wether can be see this APP.<br>
+Include API is free version.<br>
