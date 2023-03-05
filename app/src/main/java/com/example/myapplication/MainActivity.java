@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.accounts.NetworkErrorException;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
@@ -23,10 +25,10 @@ import java.util.InputMismatchException;
 public class MainActivity extends AppCompatActivity {
 
     Context context;
-    TextView SearchInput,output;
+    TextView SearchInput,output,erro;
     String TempValue = null;
 
-    @SuppressLint("WrongViewCast")
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         String cityName = SearchInput.getText().toString();
 
         if (cityName.isEmpty()){
-            output.setText("Not Found");
+            erro.setText("Please Enter Location");
         }
         else {
 
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         public void parseJson(String data)throws IOException  {
-            String result;
+            String result,symbolWith;
 
             JSONObject cityo = null;
 
@@ -100,11 +102,13 @@ public class MainActivity extends AppCompatActivity {
                 result = cityo.getJSONObject("data")
                         .getJSONObject("values")
                         .getString("temperature");
-                output.setText(result);
+                symbolWith = result + " \u2103";
+                output.setText(symbolWith);
 
-            } catch (JSONException e) {
+            }
+            catch (JSONException e) {
                System.out.println("error"+ e);
-               output.setText("Not Found");
+               erro.setText("Not Found");
 
 
             }
