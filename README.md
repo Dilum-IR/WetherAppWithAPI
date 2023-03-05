@@ -1,6 +1,6 @@
 # Wether_App_With_API
-This app develop to use java language & tommoro.io wether API.<br>
-<link>https://www.tomorrow.io/weather-api/<br>
+This app develop to use java language & tommoro.io wether API.
+<link>https://www.tomorrow.io/weather-api/<br><br>
 that tommoro.io API's always update it's details.<br>
 Realtime Wether request to used this API.<br>
 Search to can be use lat,lon or location name.<br>
