@@ -23,19 +23,19 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="..Wether.."
+        android:fontFamily="monospace"
+        android:text="Weather"
         android:textAlignment="textEnd"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textIsSelectable="false"
         android:textSize="48sp"
-        android:textStyle="normal"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.066" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <Button
         android:id="@+id/searchBtn"
@@ -45,7 +45,7 @@
         android:background="@drawable/custom_btn"
         android:onClick="search"
         android:text="Search"
-        android:textColor="#FFFFFF"
+        android:textColor="#1E88E5"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.21"
@@ -95,17 +95,17 @@
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="57dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/rectangle_1" />
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="57dp"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,28 +120,26 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@drawable/rectangle_1" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.014"
         app:srcCompat="@drawable/rectangle_1" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="57dp"
         android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/erro"
@@ -153,7 +151,7 @@
         android:layout_height="54dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="sans-serif-light"
-        android:text="_"
+        android:text="..."
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
@@ -165,12 +163,49 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.050000012" />
 
+    <TextView
+        android:id="@+id/humiditer"
+        android:layout_width="121dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="sans-serif-light"
+        android:text="..."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.077" />
+
+    <TextView
+        android:id="@+id/visible"
+        android:layout_width="121dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="sans-serif-light"
+        android:text="..."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.852" />
+
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:srcCompat="@drawable/material_symbols_visibility_rounded" />
@@ -180,7 +215,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="29dp"
         android:text="VISIBILITY"
         android:textColor="#B8DAFA"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -197,6 +232,18 @@
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="29dp"
+        android:text="humidity"
+        android:textAllCaps="true"
+        android:textColor="#B8DAFA"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="18dp"
@@ -206,5 +253,26 @@
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
         app:srcCompat="@drawable/circum_temp_high" />
+
+    <TextView
+        android:id="@+id/Tomorrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="164dp"
+        android:text="Tomorrow.io"
+        android:textColor="#A69F9F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="29dp"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:srcCompat="@drawable/carbon_humidity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

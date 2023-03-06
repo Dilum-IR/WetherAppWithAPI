@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.NetworkErrorException;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -25,8 +26,8 @@ import java.util.InputMismatchException;
 public class MainActivity extends AppCompatActivity {
 
     Context context;
-    TextView SearchInput,output,Erro;
-    String TempValue = null;
+    TextView SearchInput,output,Erro,visiblity,humiditity;
+    //String TempValue = null,visibility = null;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         SearchInput = findViewById(R.id.search);
         output = findViewById(R.id.temp);
         Erro = findViewById(R.id.erro);
+        visiblity = findViewById(R.id.visible);
+        humiditity = findViewById(R.id.humiditer);
+
 
     }
     public void search(View view) throws IOException {
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         URL url = null;
         try {
             url = new URL(uri.toString());
-            new CallApi().execute(url);
+            new CallApi(MainActivity.this).execute(url);
 
         } catch (MalformedURLException e) {
             System.out.println("error"+ e);
@@ -66,7 +70,28 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @SuppressLint("StaticFieldLeak")
     class CallApi extends AsyncTask<URL,Void,String> {
+
+        ProgressDialog progressDialog;
+        Context context;
+
+        public CallApi(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setCancelable(false);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
+        }
 
         @Override
         protected String doInBackground(URL... urls) {
@@ -92,32 +117,47 @@ public class MainActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
+        @SuppressLint("SetTextI18n")
         public void parseJson(String data)throws IOException  {
-            String result,symbolWith;
+            String temp,symbolWith,visible,humiditer;
 
-            JSONObject cityo = null;
+            JSONObject cityo = null,subJson=null;
 
             try {
                 cityo = new JSONObject(data);
+                subJson = new JSONObject(data);
 
-                result = cityo.getJSONObject("data")
-                        .getJSONObject("values")
-                        .getString("temperature");
-                symbolWith = result + " \u2103";
+                subJson = cityo.getJSONObject("data")
+                        .getJSONObject("values");
+
+
+                temp = subJson.getString("temperature");
+                symbolWith = temp + " \u2103";
+
+                visible = subJson.getString("visibility");
+                humiditer =subJson.getString("humidity");
+
+
                 output.setText(symbolWith);
-
+                visiblity.setText(visible+" Km");
+                humiditity.setText(humiditer+" %");
             }
             catch (JSONException e) {
                System.out.println("error"+ e);
              //  output.setText("Error");
 
-
             }
             if (data.equals("Error")){
                 Erro.setText("Not Found");
             }
+            progressDialog.dismiss();
 
         }
+    }
+
+    public void GotoWebsite(){
+
+
     }
 
 
