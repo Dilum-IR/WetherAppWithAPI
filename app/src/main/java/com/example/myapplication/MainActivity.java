@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         }
         @SuppressLint("SetTextI18n")
         public void parseJson(String data)throws IOException  {
-            String temp,symbolWith,visible,humiditer;
+            String temp,symbolWith,visible,humiditer,wind;
 
             JSONObject cityo = null,subJson=null;
 
@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 visible = subJson.getString("visibility");
                 humiditer =subJson.getString("humidity");
 
+                wind=subJson.getString("windSpeed");
 
                 output.setText(symbolWith);
                 visiblity.setText(visible+" Km");
